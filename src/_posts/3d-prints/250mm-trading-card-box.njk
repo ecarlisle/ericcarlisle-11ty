@@ -1,0 +1,81 @@
+---
+date: "2022-11-05"
+description: "This is a 3D print of trading card box I modeled."
+layout: post
+images:
+-
+  slug: "/images/3d-prints/trading-card-box/open_"
+  alt: "Trading card container aside the container top."
+-
+  slug: "/images/3d-prints/trading-card-box/closed_"
+  alt: "Trading card container and top assembled."
+-
+  slug: "/images/3d-prints/trading-card-box/card-fit_"
+  alt: "Example of sleeved cards fitting within the container."
+og_image:
+  alt: "Trading Card Box: 250mm depth, top loading"
+  height: 600
+  type: "image/png"
+  url: "/3d-prints/TradingCardBox-open_800.jpg"
+  width: 800
+  og_type: "article"
+permalink: "/3d-prints/250mm-trading-card-box/index.html"
+tags:
+  - "posts"
+  - "3d-prints"
+title: "250mm Trading Card Box"
+---
+<p>I made this top-load trading card box to store <a href="https://magic.wizards.com/" target="_blank" rel="noopener noreferrer">Magic: The Gathering</a> cards I collected from centuries past. It will store around 800 cards and will fit cards having light sleeves. The lift-off lid has a 0.6mm width and length clearance gap from the main container, providing a comfortable fit. All walls are 1.2mm, giving it adequate strength with minimal material usage.</p>
+<!-- excerpt -->
+<p>The depth is 250mm, so a printer with a larger bed is needed. I plan to create smaller models for smaller beds.</p>
+
+<section>
+<h2>Images</h2>
+<div class="photo-stack">
+{%- for image in images -%}
+{%-
+  component "Image.tsx", 
+  slug=image.slug,
+  host=site.hostname, 
+  alt=image.alt,
+  size="small"
+-%}
+{%- endfor -%}
+</div>
+</section>
+<hr/>
+<section>
+<h2>Print Motion Capture</h2>
+<div class="embed-container">
+  <iframe width="100%" src="https://www.youtube.com/embed/_tiRKn5gV28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</section>
+<hr/>
+<section>
+<h2>Estimated Resources</h2>
+<ul class="formatted">
+  <li><strong>Print Time:</strong> 16hrs, 51min (with 50mm/s print speed)</li>
+  <li><strong>Material Use:</strong> 139g, 46.48m</li>
+</ul>
+<p><em>(sliced with <a href="https://ultimaker.com/software/ultimaker-cura" target="_blank" rel="noopener noreferrer">Cura 5.1</a>)</em></p>
+</section>
+<hr/>
+<section>
+<h2>Recommmended Print Settings</h2>
+<ul class="formatted">
+  <li><strong>Resolution:</strong> 0.2mm</li>
+  <li><strong>Support:</strong> none</li>
+  <li><strong>Infill:</strong> 20%</li>
+  <li><strong>Raft/Brim:</strong> none</li>
+  <li><strong>Vertical Walls:</strong> 4</li> 
+  <li><strong>Horizontal Walls:</strong> 3</li> 
+</ul>
+</section>
+<hr/>
+<section>
+<h2>Printed With</h2>
+<ul class="formatted">
+  <li><strong>Printer:</strong> <a href="https://www.creality3dofficial.com/products/creality-3d-cr-10-v2-3d-printer" target="_blank" rel="noopener noreferrer">Creality CR-10 v2</a></li>
+  <li><strong>Filament:</strong> Hatchbox PLA, 1.75mm (white)</li>
+</ul>
+</section>

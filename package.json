@@ -1,0 +1,49 @@
+{
+  "name": "www.ericcarlisle.com",
+  "version": "4.0.0",
+  "description": "Website for Eric Carlisle : Web Developer, UX Strategist",
+  "main": ".eleventy.js",
+  "scripts": {
+    "build": "rm -rf _site && npx @11ty/eleventy -- --config .eleventy.js",
+    "clean": "rm -rf _site",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy --serve --incremental --config .eleventy.js --port 3000",
+    "watch": "npx @11ty/eleventy --serve --incremental --config .eleventy.js --port 3000",
+    "watch:prod": "MODE=production npx @11ty/eleventy --serve --incremental --quiet --config .eleventy.js --port 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": "last 2 versions, > 0.3%, not dead",
+  "devDependencies": {
+    "@11ty/eleventy-fetch": "^3.0.0",
+    "@11ty/eleventy-img": "^2.0.1",
+    "@11ty/eleventy-navigation": "^0.3.5",
+    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.2.0",
+    "@slinkity/renderer-react": "^1.0.0",
+    "@types/react": "^18.0.25",
+    "autoprefixer": "^10.4.13",
+    "browserslist": "^4.21.4",
+    "cssnano": "^5.1.14",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-react": "^7.31.10",
+    "html-minifier": "^4.0.0",
+    "html-react-parser": "^3.0.4",
+    "luxon": "^3.1.0",
+    "markdown-it": "^13.0.1",
+    "postcss": "^8.4.18",
+    "postcss-cli": "^10.0.0",
+    "postcss-sort-media-queries": "^4.3.0",
+    "prettier": "^2.7.1",
+    "prettier-eslint": "^15.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.56.0",
+    "slinkity": "^0.8.3"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "react-lite-youtube-embed": "^2.3.52"
+  }
+}

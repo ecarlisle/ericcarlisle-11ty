@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="{{site.lang}}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">    
+    
+    <!-- Title & Description -->
+    <title>{{ title }}</title>
+    <meta name="description" content="{{description}}">
+
+    <!-- Google tag (gtag.js) -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {%- if site.mode == 'production' -%}
+      <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-34545855-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-34545855-1');
+        gtag('set', 'allow_google_signals', false);
+      </script>
+    {%- endif -%}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{site.hostname}}{{permalink}}"/>
+
+    <!-- fb: meta -->
+    <meta property="fb:app_id" content="{{site.facebookAppId}}"/>
+    <meta property="fb:pages" content="{{site.facebookPageId}}"/>
+
+    <!-- Open Graph meta -->
+    <meta property="og:site_name" content="{{site.name}}">
+    <meta property="og:type" content="{{og_type}}"/>
+    <meta property="og:title" content="{{title}}"/>
+    <meta property="og:url" content="{{site.url}}{{permalink | url }}"/>
+    <meta property="og:locale" content="{{site.locale}}"/>
+
+    <meta property="og:image" content="{{site.url}}{{og_image.url}}"/>
+    <meta property="og:image:type" content="{{og_image.type}}"/>
+    <meta property="og:image:width" content="{{og_image.width}}"/>
+    <meta property="og:image:height" content="{{og_image.height}}"/>
+    <meta property="og:image:alt" content="{{og_image.alt}}"/>
+
+    <!-- Twitter meta -->
+    <meta name="twitter:card" content="{{twitter_card_type}}"/>
+    <meta name="twitter:title" content="{{title}}"/>
+    <meta name="twitter:description" content="{{description}}"/>
+    <meta name="twitter:image" content="{{og_image.url}}"/>
+    <meta name="twitter:site" content="{{site.social.Twitter.username}}"/>
+    <meta name="twitter:image:alt" content="{{og_image.alt}}">
+
+  <!-- Stylesheet (TODO : Inline CSS) -->
+  <link rel="stylesheet" href="/@root/style/global.scss"> {{ __slinkity.head | safe }}
+
+  <!-- Structured Data -->
+  {%- include "../structuredData.njk" -%}
+</head>
+<body>
+  <header class="primary">
+    <div class="wrapper">
+    <a class="logo" href="/">
+      <svg class="icon-html-open" width="15" height="24" viewBox="0 0 15 24" fill="none">
+        <use href="#icon-html-open"></use>
+      </svg><span class="title">
+        Eric Carlisle
+      </span>
+      <span class="subtitle">
+        : UI, UX Engineer
+      </span>
+      <svg class="icon-html-close" width="32" height="24" viewBox="0 0 32 24" fill="none">
+        <use href="#icon-html-close"></use>
+      </svg></a>
+      <nav class="primary">
+        {% set navPages = collections.all | eleventyNavigation %}
+        <ul>
+        {%- for entry in navPages %}
+          <li{% if entry.url == page.url %} class="active"{% endif %}><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+        {%- endfor %}
+      </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="wrapper main-content-wrapper">
+    <main>
+      {{ content | safe }}
+    </main>
+    <aside> 
+      <picture class="profile-image">
+        <source srcset="/images/eric-carlisle_512.webp 2x,
+                        /images/eric-carlisle_512.webp 1x"  
+                type="image/webp" />
+        <source srcset="/images/eric-carlisle_512.avif 2x,
+                        /images/eric-carlisle_512.avif 1x"  
+                type="image/avif" />
+        <source srcset="/images/eric-carlisle_512.jpg 2x,
+                        /images/eric-carlisle_512.jpg 1x"  
+                type="image/jpeg" />
+          <img src="/images/eric-carlisle_256.jpg"
+               width="256" 
+               height="256" 
+               alt="Eric Carlisle - Profile Image" />
+        </picture>
+
+      <div class="social-icons">
+      {%- for name, item in site.social %}
+        <a href="{{item.url}}" aria-label="Eric's {{name}} Profile">
+          <svg width="28" height="28" viewBox="0 0 28 28">
+            <use href="#icon-social-{{name.toLowerCase()}}"></use>
+          </svg>
+        </a>
+      {% endfor -%}
+        <a href="/sitemap.xml" aria-label="RSS Feed">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <use href="#icon-rss"></use>
+          </svg>
+        </a>
+      </div>
+    </aside>
+  </div>
+  <footer class="primary">
+    <div class="wrapper">
+      <span>
+        Built with <a href="https://11ty.dev">11ty</a>
+      </span>
+      <span>
+        © Copyright 2022 Eric Carlisle
+      </span>
+    </div>
+    <svg display="none" aria-hidden="true">
+      <defs>
+        <g id="icon-html-open">
+          <!-- width="15" height="24" viewBox="0 0 15 24" -->
+          <path d="M13 2L3 12L13 22" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g id="icon-html-close">
+          <!-- width="32" height="24" viewBox="0 0 32 24" -->
+          <path d="M19 22L29 12L19 2" stroke="black" stroke-width="4" stroke-linecap="round"/>
+          <path d="M12 2L2 22" stroke="black" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <g id="icon-social-mastodon">
+          <!-- width="23" height="24" viewBox="0 0 23 24" -->
+          <path fill="#0284C7" d="M22.3902987,5.29588861 C22.0440304,2.74982886 19.8007291,0.743362025 17.1414684,0.354562025 C16.6928203,0.288863696 14.9929519,0.0497674937 11.0552203,0.0497674937 L11.0258127,0.0497674937 C7.08701772,0.0497674937 6.24197468,0.288863696 5.79332658,0.354562025 C3.20810127,0.732592405 0.847221266,2.53550582 0.274422076,5.1116962 C-0.00108715139,6.38041519 -0.0304894177,7.78699747 0.0206922532,9.0772557 C0.0936531646,10.9275646 0.107809823,12.7746228 0.277689114,14.6173975 C0.395131139,15.8414582 0.600006076,17.0557671 0.890779747,18.2512101 C1.4352638,20.4590886 3.63934177,22.2964557 5.79876456,23.0460759 C8.11075443,23.8278076 10.5970937,23.9575595 12.979443,23.4208709 C13.2414987,23.3605671 13.5006987,23.2905418 13.7569519,23.2108557 C14.3352,23.0288506 15.0136405,22.8252759 15.5123848,22.4677063 C15.5192203,22.4626937 15.5248405,22.4562228 15.5287899,22.4487494 C15.5327392,22.4413063 15.534957,22.433043 15.5352304,22.4246278 L15.5352304,20.6389671 C15.5351089,20.6310987 15.5332253,20.6233519 15.5297013,20.6163038 C15.5261468,20.6092557 15.5210734,20.6030582 15.5147848,20.5982278 C15.5085266,20.5933671 15.5012354,20.5899646 15.4934886,20.5882329 C15.4857114,20.5865316 15.4776608,20.586562 15.4699139,20.5883241 C13.9435747,20.9489316 12.3794734,21.1296911 10.8102076,21.1268354 C8.10956962,21.1268354 7.38322025,19.8592101 7.17521013,19.3314532 C7.00803038,18.875362 6.90185316,18.3996152 6.85941266,17.9162734 C6.85898734,17.908162 6.86050633,17.9000506 6.86381772,17.8926076 C6.86712911,17.8851949 6.87220253,17.8786329 6.8785519,17.8734987 C6.88493165,17.8683646 6.89243544,17.8647797 6.9004557,17.8630481 C6.90847595,17.8612861 6.9168,17.8614684 6.92475949,17.8635038 C8.42567089,18.2216506 9.96425316,18.4024101 11.508243,18.4020152 C11.8795747,18.4020152 12.2498127,18.4020152 12.6211747,18.3923241 C14.1740354,18.3492456 15.8107443,18.2706228 17.3385722,17.9755139 C17.3766987,17.9679797 17.4147949,17.9615089 17.4474835,17.9518177 C19.857357,17.4940861 22.1507241,16.0573671 22.3837671,12.4192101 C22.3924861,12.2759696 22.4142684,10.9189367 22.4142684,10.770319 C22.415362,10.2651949 22.5787139,7.18711899 22.3902987,5.29588861 Z M18.6812658,14.3739949 L16.1472608,14.3739949 L16.1472608,8.23503797 C16.1472608,6.94262278 15.6027646,6.2835038 14.4952709,6.2835038 C13.2778025,6.2835038 12.6679899,7.06326076 12.6679899,8.60336203 L12.6679899,11.9636354 L10.1492051,11.9636354 L10.1492051,8.60336203 C10.1492051,7.06326076 9.53829873,6.2835038 8.32083038,6.2835038 C7.21986835,6.2835038 6.66993418,6.94262278 6.66884051,8.23503797 L6.66884051,14.3739949 L4.13699241,14.3739949 L4.13699241,8.04871899 C4.13699241,6.7563038 4.47059241,5.72955949 5.13776203,4.9684557 C5.82598481,4.20917468 6.72874937,3.81931139 7.84930633,3.81931139 C9.1462481,3.81931139 10.1263291,4.31255696 10.7797063,5.29804557 L11.410238,6.34490127 L12.0418329,5.29804557 C12.6952101,4.31255696 13.6752911,3.81931139 14.9700759,3.81931139 C16.0895392,3.81931139 16.9922734,4.20917468 17.6826835,4.9684557 C18.3498835,5.72883038 18.6834532,6.75557468 18.6834532,8.04871899 L18.6812658,14.3739949 Z" id="Shape"></path>
+        </g>
+        <g id="icon-social-linkedin">
+          <!-- width="24" height="24" viewBox="0 0 24 24"-->
+          <path fill="#0284C7" d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+        </g>
+        <g id="icon-social-instagram">
+          <!-- width="24" height="24" viewBox="0 0 24 24" -->
+          <path fill="#0284C7" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </g>
+        <g id="icon-social-github">
+          <!-- width="24" height="24" viewBox="0 0 24 24" -->
+          <path fill="#0284C7" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </g>
+        <g id="icon-rss">
+          <!-- width="24" height="24" viewBox="0 0 24 24" -->
+          <path fill="#0284C7" d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+        </g>
+      </defs>
+    </svg>
+  </footer>
+</body>
+</html>
