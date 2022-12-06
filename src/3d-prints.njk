@@ -1,0 +1,45 @@
+---
+date: "2022-11-05"
+description: "These are a collection of 3D-Prints I've made."
+layout: section
+eleventyNavigation:
+  key: 3D Prints
+  order: 3
+og_image: 
+  alt: "Eric Carlisle : UI Developer, UX Strategist"
+  height: 800
+  type: "image/png"
+  url: "/img/eric-carlisle-800x800.png"
+  width: 800
+og_type: blog
+pagination:
+  data: collections.3d-prints
+  size: 20
+  alias: pages
+permalink: /3d-prints/index.html
+tags: 
+  - section
+title: "3D Prints"
+---
+<p>These are a collection of 3D-Prints I've made. Credit will be given to model makers and/or owners of respective intellectual property.</p>
+<hr/>
+{%- for page in pages -%}
+
+  <ul class="article-list">
+    <li>
+      <article>
+        <h2>
+          <a href="{{ page.url }}">{{ page.data.title }}</a>
+        </h2>
+        [<a href="{{ page.url }}">{%-
+          component "Image.tsx", 
+          slug=page.data.images[0]["slug"],
+          host=site.hostname,
+          alt=page.data.images[0]["alt"]
+        -%}</a>]
+
+        <p>{{ page.data.excerpt | toHTML| safe }}</p>
+      </article>
+    </li> 
+  </ul>
+{%- endfor -%}

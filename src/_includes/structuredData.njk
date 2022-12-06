@@ -15,7 +15,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "email": "website@ericcarlisle.com",
+    "email": "eric.carlisle@gmail.com",
     "description": "UI Developer, UX Strategist, Speaker, Mentor, Maker",
     "name": "Eric Carlisle",
     "image": "{{site.url}}{{site.image}}",
@@ -37,23 +37,28 @@
       "https://twitter.com/eric_carlisle",
       "https://www.linkedin.com/in/ericcarlisle/",
       "https://github.com/ecarlisle",
-      "https://www.instagram.com/ericcarlisle/"
+      "https://www.instagram.com/ericcarlisle/",
+      "https://www.thingiverse.com/ecarlisle/designs",
+      "https://www.tinkercad.com/users/cp60qc9UomJ-eric-carlisle"
     ]
   }
 </script>
+{% set breadcrumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true, allowMissing: true }) %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-      "@id": "{{site.url}}",
-      "name": "Home",
-      "image": "{{site.url}}{{site.image}}"
-    }
-  }]
+  "itemListElement": 
+  [
+    {% for crumb in breadcrumbs %}
+    {
+      "@type": "ListItem",
+      "position": {{loop.index}},
+      "name": "{{crumb.title}}",
+      "@id": "{{site.url}}{{crumb.url}}"
+    }{%- if not loop.last %},{% endif -%}
+    {% endfor %}
+  ]
 }
 </script>
 <script type="application/ld+json">

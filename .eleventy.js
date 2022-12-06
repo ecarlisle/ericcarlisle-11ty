@@ -4,7 +4,7 @@ const slinkity = require('slinkity');
 const react = require('@slinkity/renderer-react');
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation');
 const Image = require('@11ty/eleventy-img');
-const htmlmin = require("html-minifier");
+const htmlmin = require('html-minifier');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const markdownIt = require('markdown-it');
@@ -44,17 +44,20 @@ async function imageShortcode(src, alt, sizes) {
 
 module.exports = function (eleventyConfig) {
   // Plugins
-  eleventyConfig.addPlugin(slinkity.plugin, slinkity.defineConfig({
-    renderers: [react],
-    server: {
-      https: false,
-      host: "127.0.0.1",
-      port: 8080,
-    },
-    build: {
-      minify: "esbuild",
-    },
-  }));
+  eleventyConfig.addPlugin(
+    slinkity.plugin,
+    slinkity.defineConfig({
+      renderers: [react],
+      server: {
+        https: false,
+        host: '127.0.0.1',
+        port: 8080,
+      },
+      build: {
+        minify: 'esbuild',
+      },
+    }),
+  );
 
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(pluginRss);
@@ -74,6 +77,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode('minifyJson', (json) => {
     return JSON.stringify(JSON.parse(json));
   });
+
   //eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
 
   // Libraries
@@ -86,24 +90,16 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('readableDate', (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat(
-      'dd LLL yyyy'
-    );
+    return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('MMMM d, yyyy');
   });
 
   eleventyConfig.addFilter('toHTML', (str) => {
-    return new markdownIt(MARKDOWN_OPTIONS).render(str);
-  });
-
-  eleventyConfig.addFilter('readableDate', (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat(
-      'LLL d, yyyy'
-    );
+    return new markdownIt(MARKDOWN_OPTIONS).render(str.toString());
   });
 
   eleventyConfig.addFilter('filterTagList', (tags) => {
     return (tags || []).filter(
-      (tag) => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1
+      (tag) => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1,
     );
   });
 
